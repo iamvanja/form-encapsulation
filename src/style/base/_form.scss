@@ -1,0 +1,187 @@
+form {
+  input[type=radio],
+  input[type=checkbox] {
+    position: absolute;
+    top: auto;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px); /* IE 6/7 */
+    clip: rect(1px, 1px, 1px, 1px);
+    width: 1px;
+    height: 1px;
+    white-space: nowrap; /* https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe */
+  }
+
+  input[type=radio] + label,
+  input[type=checkbox] + label {
+    display: block;
+    padding: rem-calc(1px);
+    padding-left: rem-calc(32px);
+    max-width: 100%;
+    margin-left: 0;
+    margin-bottom: $form-spacing / 2;
+  }
+
+  input[type=radio] + label:before,
+  input[type=checkbox] + label:before {
+    content: '';
+    background: #fff;
+    border: rem-calc(1px) solid rgba($app-dark-gray, 0.8);
+    border-radius: rem-calc(5px);
+    background-color: rgba($app-white, 0.8);
+    display: block;
+    box-sizing: border-box;
+    float: left;
+    width: rem-calc(20px);
+    height: rem-calc(20px);
+    margin-left: rem-calc(-28px);
+    margin-top: rem-calc(3px);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s ease-out;
+  }
+
+  input[type=radio] + label:before {
+    border-radius: 100%;
+  }
+
+  input[type=checkbox] + label:before {
+    font-family: 'icons';
+    content: '\e805';
+    text-align: center;
+    line-height: 1.15;
+    color: rgba($app-white, 0);
+  }
+
+  input[type=radio]:checked + label:before {
+    background-color: $app-primary-color;
+    box-shadow: inset 0 0 0 rem-calc(3px) rgba($app-white, 0.95);
+  }
+
+  input[type=checkbox]:checked + label:before {
+    color: rgba($app-white, 1);
+    background-color: $app-primary-color;
+  }
+
+  input[type=radio]:checked + label:before,
+  input[type=checkbox]:checked + label:before {
+    border-color: $app-primary-color;
+  }
+
+  input[type=radio]:disabled + label:before,
+  input[type=checkbox]:disabled + label:before {
+    cursor: not-allowed;
+  }
+
+  input[type=radio]:not(:disabled):hover + label:before,
+  input[type=checkbox]:not(:disabled):hover + label:before {
+    border-color: $app-primary-color;
+  }
+
+  @media screen and (-ms-high-contrast: active) {
+    input[type=checkbox] + label:before,
+    input[type=radio] + label:before {
+      content: ' ';
+    }
+
+    input[type=checkbox]:checked + label:before {
+      content: '\e805';
+    }
+
+    input[type=radio]:checked + label:before {
+      content: '\00d7';
+      font-weight: bold;
+      line-height: 1.15;
+      background-color: transparent;
+      box-shadow: none;
+    }
+
+    input[type=checkbox]:disabled + label,
+    input[type=radio]:disabled + label {
+      color: grayText;
+      cursor: not-allowed;
+    }
+  }
+
+  .form-element {
+    position: relative;
+
+    &.is-required {
+      /* stylelint-disable-next-line no-descending-specificity */
+      > label:before {
+        color: $app-alert-color;
+        content: ' *';
+      }
+    }
+
+    &.is-disabled {
+      label {
+        opacity: 0.65;
+        cursor: not-allowed;
+
+        &:after {
+          content: " (disabled)";
+        }
+      }
+    }
+
+    &.has-tooltip {
+      label {
+        display: inline-block;
+        margin-right: 0;
+      }
+    }
+
+    &.inline-block {
+      display: inline-block;
+
+      &.has-tooltip {
+        margin-right: $form-spacing;
+      }
+    }
+
+    &.type- {
+      &datepicker {
+        // allow .react-datepicker-popper to be bigger size than the input
+        position: static;
+      }
+    }
+
+    // react-select
+    .Select {
+      margin-bottom: $form-spacing; // needed for .form-error spacing
+
+      &.is-invalid-input {
+        .Select-control {
+          // @include form-input-error();
+        }
+      }
+    }
+
+    // ant custom component
+    .radio-group-button {
+      margin: 0 0 $form-spacing;
+    }
+
+    // Fix label falling apart in all MS Edge browsers
+    @supports (-ms-ime-align:auto) {
+      label .grid-margin-x {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+    // Fix label falling apart in IE11
+    @media screen and (-ms-high-contrast: none) {
+      label .grid-margin-x {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  }
+
+  .debug-container {
+    height: rem-calc(150px);
+    overflow: auto;
+    border: 1px solid lightgrey;
+  }
+}
