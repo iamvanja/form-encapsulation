@@ -25,10 +25,7 @@ const defaultButtonRowComponent = (formProps, options) => {
           className='expanded'
           disabled={isSubmitting}
         >
-          {isSubmitting
-            ? 'Saving...'
-            : 'Save'
-          }
+          Save
         </Button>
       </div>
     </div>

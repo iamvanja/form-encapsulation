@@ -2,5 +2,10 @@
 
 @import "abstracts/variables";
 
+// vendor
+@import "vendor/foundation/foundation";
+
+@include foundation-everything();
+
 @import 'base/general';
 @import 'base/form';

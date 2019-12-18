@@ -139,29 +139,6 @@ form {
       }
     }
 
-    &.type- {
-      &datepicker {
-        // allow .react-datepicker-popper to be bigger size than the input
-        position: static;
-      }
-    }
-
-    // react-select
-    .Select {
-      margin-bottom: $form-spacing; // needed for .form-error spacing
-
-      &.is-invalid-input {
-        .Select-control {
-          // @include form-input-error();
-        }
-      }
-    }
-
-    // ant custom component
-    .radio-group-button {
-      margin: 0 0 $form-spacing;
-    }
-
     // Fix label falling apart in all MS Edge browsers
     @supports (-ms-ime-align:auto) {
       label .grid-margin-x {
